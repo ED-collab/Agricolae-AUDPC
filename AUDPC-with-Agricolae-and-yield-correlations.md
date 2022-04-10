@@ -3,15 +3,24 @@ AUDPC and yield correlations
 Erik Delaquis
 4/10/2022
 
+``` r
+#Libraries
+library(tidyverse)
+library(ggrepel)
+library(readxl)
+library(agricolae)
+```
+
 # Y1
 
 ``` r
 #Leaving here just in case we want to go back to disaggregating sites
 
+
 #Y1
 #Filter only site 1
-Y1_S1<- read_excel("data/3Y_for_ANOVA.xlsx", 
-                             sheet = "Y1") %>% filter(Site==1)
+Y1_S1 <- read_excel("data/3Y_for_ANOVA.xlsx",
+                    sheet = "Y1") %>% filter(Site == 1)
 Y1_S1
 ```
 
@@ -33,8 +42,9 @@ Y1_S1
     ## #   Percent_inf_cul_270 <dbl>, Adj_yield_kg <dbl>, adjusted kg/plant <dbl>
 
 ``` r
-DAP<-c(60,150,270)
-ratings<-as.data.frame(Y1_S1[,c(9,10,11)]) #Have to transform into data frame for the next step to work
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y1_S1[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
 ratings
 ```
 
@@ -78,11 +88,14 @@ ratings
 
 ``` r
 #Calculate absolute and relative AUDPC ratings and bind them on the end of the data set
-audpc.abs.Y1_S1<-audpc(ratings, DAP, type="absolute") #Absolute AUDPC for ANOVA purposes
-Y1_S1.AUDPC<-cbind(Y1_S1,audpc.abs.Y1_S1) %>% rename(audpc_absolute=audpc.abs.Y1_S1)
+audpc.abs.Y1_S1 <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1_S1.AUDPC <-
+  cbind(Y1_S1, audpc.abs.Y1_S1) %>% rename(audpc_absolute = audpc.abs.Y1_S1)
 
-audpc.rel.Y1_S1<-audpc(ratings, DAP, type="relative")
-Y1_S1.AUDPC<-cbind(Y1_S1.AUDPC,audpc.rel.Y1_S1) %>% rename(audpc_relative=audpc.rel.Y1_S1)
+audpc.rel.Y1_S1 <- audpc(ratings, DAP, type = "relative")
+Y1_S1.AUDPC <-
+  cbind(Y1_S1.AUDPC, audpc.rel.Y1_S1) %>% rename(audpc_relative = audpc.rel.Y1_S1)
 glimpse(Y1_S1.AUDPC)
 ```
 
@@ -106,8 +119,8 @@ glimpse(Y1_S1.AUDPC)
 
 ``` r
 #Filter site 2
-Y1_S2<- read_excel("data/3Y_for_ANOVA.xlsx", 
-                             sheet = "Y1") %>% filter(Site==2)
+Y1_S2 <- read_excel("data/3Y_for_ANOVA.xlsx",
+                    sheet = "Y1") %>% filter(Site == 2)
 Y1_S2
 ```
 
@@ -129,8 +142,9 @@ Y1_S2
     ## #   Percent_inf_cul_270 <dbl>, Adj_yield_kg <dbl>, adjusted kg/plant <dbl>
 
 ``` r
-DAP<-c(60,150,270)
-ratings<-as.data.frame(Y1_S2[,c(9,10,11)]) #Have to transform into data frame for the next step to work
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y1_S2[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
 ratings
 ```
 
@@ -174,11 +188,14 @@ ratings
 
 ``` r
 #Calculate absolute and relative AUDPC ratings and bind them on the end of the data set
-audpc.abs.Y1_S2<-audpc(ratings, DAP, type="absolute") #Absolute AUDPC for ANOVA purposes
-Y1_S2.AUDPC<-cbind(Y1_S2,audpc.abs.Y1_S2) %>% rename(audpc_absolute=audpc.abs.Y1_S2)
+audpc.abs.Y1_S2 <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1_S2.AUDPC <-
+  cbind(Y1_S2, audpc.abs.Y1_S2) %>% rename(audpc_absolute = audpc.abs.Y1_S2)
 
-audpc.rel.Y1_S2<-audpc(ratings, DAP, type="relative")
-Y1_S2.AUDPC<-cbind(Y1_S2.AUDPC,audpc.rel.Y1_S2) %>% rename(audpc_relative=audpc.rel.Y1_S2)
+audpc.rel.Y1_S2 <- audpc(ratings, DAP, type = "relative")
+Y1_S2.AUDPC <-
+  cbind(Y1_S2.AUDPC, audpc.rel.Y1_S2) %>% rename(audpc_relative = audpc.rel.Y1_S2)
 glimpse(Y1_S2.AUDPC)
 ```
 
@@ -207,9 +224,10 @@ glimpse(Y1_S2.AUDPC)
 
 #Using the file prepared with all 3 years called 3Y_for_ANOVA
 #Load data from excel workbook
-Y1<- read_excel("data/3Y_for_ANOVA.xlsx", 
-                             sheet = "Y1")
-ratings<-as.data.frame(Y1[,c(9,10,11)]) #Have to transform into data frame for the next step to work
+Y1 <- read_excel("data/3Y_for_ANOVA.xlsx",
+                 sheet = "Y1")
+ratings <-
+  as.data.frame(Y1[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
 ratings
 ```
 
@@ -288,13 +306,16 @@ ratings
     ## 72          16.666667           16.666667           91.666667
 
 ``` r
-DAP<-c(60,150,270)
+DAP <- c(60, 150, 270)
 
-audpc.abs.Y1<-audpc(ratings, DAP, type="absolute") #Absolute AUDPC for ANOVA purposes
-Y1.AUDPC<-cbind(Y1,audpc.abs.Y1) %>% rename(audpc_absolute=audpc.abs.Y1)
+audpc.abs.Y1 <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1.AUDPC <-
+  cbind(Y1, audpc.abs.Y1) %>% rename(audpc_absolute = audpc.abs.Y1)
 
-audpc.rel.Y1<-audpc(ratings, DAP, type="relative")
-Y1.AUDPC<-cbind(Y1.AUDPC,audpc.rel.Y1) %>% rename(audpc_relative=audpc.rel.Y1)
+audpc.rel.Y1 <- audpc(ratings, DAP, type = "relative")
+Y1.AUDPC <-
+  cbind(Y1.AUDPC, audpc.rel.Y1) %>% rename(audpc_relative = audpc.rel.Y1)
 glimpse(Y1.AUDPC)
 ```
 
@@ -318,15 +339,93 @@ glimpse(Y1.AUDPC)
 
 ### Visualize data
 
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+``` r
+ggplot(Y1.AUDPC, aes(x = Var, y = audpc_absolute, fill = Split_trt)) +
+  geom_boxplot(position = position_dodge(0.8)) +
+  geom_dotplot(binaxis = 'y',
+               stackdir = 'center',
+               position = position_dodge(0.8))
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+``` r
+ggplot(Y1.AUDPC, aes(x = Var, y = Adj_yield_kg, fill = Split_trt)) +
+  geom_boxplot(position = position_dodge(0.8)) +
+  geom_dotplot(binaxis = 'y',
+               stackdir = 'center',
+               position = position_dodge(0.8))
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
 ### Line graphs for Y1 (both sites)
+
+``` r
+#Make sure to call the Y1.AUDPC from above (chunk starting at line 66)
+#library for summarizing
+library(doBy)
+
+#First transform combined Y1 data into long format
+Y1.AUDPC.gg <-
+  Y1.AUDPC %>% select(
+    Var,
+    Site,
+    Rep,
+    "60" = Percent_inf_cul_60,
+    "150" = Percent_inf_cul_150,
+    "270" = Percent_inf_cul_270,
+    audpc_absolute,
+    audpc_relative
+  ) %>%
+  gather(DAP, Percent_inf, "60":"270", factor_key = TRUE)
+
+library(gridExtra)
+#Both together to allow use of faceting
+Y1try <-
+  summaryBy(Percent_inf ~ Var + DAP + Site,
+            data = Y1.AUDPC.gg,
+            FUN = c(length, mean, sd))
+
+# Rename column change.length to just N
+names(Y1try)[names(Y1try) == "Percent_inf.length"] <- "N"
+# Calculate se for error bars using basic formula of sd/sqrt(N)
+Y1try$Percent_inf.se <- Y1try$Percent_inf.sd / sqrt(Y1try$N)
+
+Y1try_line <-
+  ggplot(data = Y1try, aes(x = DAP, y = Percent_inf.mean, group = Var)) +
+  geom_errorbar(
+    aes(
+      ymin = Percent_inf.mean - Percent_inf.se,
+      ymax = Percent_inf.mean + Percent_inf.se
+    ),
+    width = .1
+  ) +
+  geom_line(aes(color = Var), size = 1) + ylim(0, 100) +
+  geom_point(aes(color = Var), shape = 1, size = 3) +
+  labs(color = 'Variety') +
+  theme_classic()
+
+Y1try_line + facet_grid(rows = vars(Site), labeller = label_both) +
+  xlab("Days after planting (DAP)") +
+  ylab("Percent infection")
+```
 
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 #### Separating sites
 
 ##### Y1 Site 1 no fertilizer (NF)
+
+``` r
+Y1.S1.NF <- read_excel("data/3Y_for_ANOVA.xlsx",
+                       sheet = "Y1") %>% filter(Site == 1 &
+                                                  Split_trt == "Without fertilizer")
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y1.S1.NF[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
+ratings
+```
 
     ##    Percent_inf_cul_60 Percent_inf_cul_150 Percent_inf_cul_270
     ## 1            0.000000            0.000000            0.000000
@@ -348,9 +447,19 @@ glimpse(Y1.AUDPC)
     ## 17           0.000000           63.636364          100.000000
     ## 18           0.000000            0.000000            0.000000
 
+``` r
+relative <-
+  audpc(ratings, DAP, type = "relative") #Calculating relative AUDPC for correlation with yield, as in the example
+relative
+```
+
     ##  [1] 0.00000000 0.16883117 0.07857143 0.00000000 0.58928571 0.07142857
     ##  [7] 0.00000000 0.24675325 0.00000000 0.02380952 0.50000000 0.10714286
     ## [13] 0.00000000 0.14285714 0.00000000 0.00000000 0.60389610 0.00000000
+
+``` r
+correlation(Y1.S1.NF$Adj_yield_kg, relative, method = "kendall")
+```
 
     ## 
     ## Kendall's rank correlation tau
@@ -362,6 +471,11 @@ glimpse(Y1.AUDPC)
     ## tau
     ##  0.1663134
 
+``` r
+correlation(Y1.S1.NF$Adj_yield_kg, Y1.S1.NF$Percent_inf_cul_60, method =
+              "kendall")
+```
+
     ## 
     ## Kendall's rank correlation tau
     ## 
@@ -371,6 +485,11 @@ glimpse(Y1.AUDPC)
     ## sample estimates:
     ## tau
     ##  0.0310535
+
+``` r
+correlation(Y1.S1.NF$Adj_yield_kg, Y1.S1.NF$Percent_inf_cul_150, method =
+              "kendall")
+```
 
     ## 
     ## Kendall's rank correlation tau
@@ -382,6 +501,11 @@ glimpse(Y1.AUDPC)
     ## tau
     ##  0.1902606
 
+``` r
+correlation(Y1.S1.NF$Adj_yield_kg, Y1.S1.NF$Percent_inf_cul_270, method =
+              "kendall")
+```
+
     ## 
     ## Kendall's rank correlation tau
     ## 
@@ -391,6 +515,15 @@ glimpse(Y1.AUDPC)
     ## sample estimates:
     ## tau
     ##  0.1807754
+
+``` r
+#Bind calculated absolute AUDPC to original and rename
+audpc.Y1.S1.NF <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1.S1.NF.AUDPC <-
+  cbind(Y1.S1.NF, audpc.Y1.S1.NF) %>% rename(audpc = audpc.Y1.S1.NF)
+glimpse(Y1.S1.NF.AUDPC)
+```
 
     ## Rows: 18
     ## Columns: 14
@@ -409,6 +542,14 @@ glimpse(Y1.AUDPC)
     ## $ `adjusted kg/plant` <dbl> 1.498830, 1.952461, 2.508707, 1.866667, 2.866667, ~
     ## $ audpc               <dbl> 0.000, 3545.455, 1650.000, 0.000, 12375.000, 1500.~
 
+``` r
+#ANOVA
+Y1.S1.NF.model <-
+  lm(audpc ~ Var + Rep + Var * Rep, data = Y1.S1.NF.AUDPC)
+Y1.S1.NF.ANOVA <- anova(Y1.S1.NF.model) #ANOVA and print the results
+Y1.S1.NF.ANOVA
+```
+
     ## Analysis of Variance Table
     ## 
     ## Response: audpc
@@ -419,6 +560,16 @@ glimpse(Y1.AUDPC)
     ## Residuals  6   7293131  1215522                      
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+Y1.S1.NF.aov = aov(Y1.S1.NF.model) #ANOVA and store the data for next use
+```
+
+``` r
+##Can do post-hoc Tukey HSD with Agricolae package
+Y1.S1.NF.TUKEY <- HSD.test(Y1.S1.NF.aov, trt = 'Var')
+Y1.S1.NF.TUKEY
+```
 
     ## $statistics
     ##   MSerror Df     Mean       CV      MSD
@@ -459,11 +610,36 @@ glimpse(Y1.AUDPC)
     ## attr(,"class")
     ## [1] "group"
 
+``` r
+plot(Y1.S1.NF.TUKEY) + title(sub = "Site 1, Y1, No fertilizer")
+```
+
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
     ## numeric(0)
 
+``` r
+##Can also do Tukey HSD with multcompview package, output graph a little different. See https://www.r-graph-gallery.com/84-tukey-test.html
+#library(multcompView)
+# Tukey test to study each pair of treatment :
+#Y1.S1.NF.TUKEYMult <- TukeyHSD(Y1.S1.NF.aov, "Var", conf.level=0.95)
+#Y1.S1.NF.TUKEYMult
+
+# Tukey test representation :
+#plot(Y1.S1.NF.TUKEYMult , las=1 , col="brown")
+```
+
 ##### Y1 Site 1 with fertilizer
+
+``` r
+Y1.S1.WF <- read_excel("data/3Y_for_ANOVA.xlsx",
+                       sheet = "Y1") %>% filter(Site == 1 &
+                                                  Split_trt == "With fertilizer")
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y1.S1.WF[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
+ratings
+```
 
     ##    Percent_inf_cul_60 Percent_inf_cul_150 Percent_inf_cul_270
     ## 1             0.00000            0.000000            0.000000
@@ -485,9 +661,18 @@ glimpse(Y1.AUDPC)
     ## 17           27.27273           90.909091          100.000000
     ## 18            0.00000            0.000000           11.111111
 
+``` r
+relative <- audpc(ratings, DAP, type = "relative")
+relative
+```
+
     ##  [1] 0.00000000 0.17532468 0.15714286 0.07142857 0.64880952 0.00000000
     ##  [7] 0.02597403 0.31168831 0.26190476 0.08730159 0.63095238 0.00000000
     ## [13] 0.00000000 0.19642857 0.17460317 0.06547619 0.79870130 0.03174603
+
+``` r
+correlation(Y1.S1.WF$Adj_yield_kg, relative, method = "kendall")
+```
 
     ## 
     ## Kendall's rank correlation tau
@@ -498,6 +683,15 @@ glimpse(Y1.AUDPC)
     ## sample estimates:
     ## tau
     ##  -0.05351919
+
+``` r
+#Bind calculated absolute AUDPC to original and rename
+audpc.Y1.S1.WF <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1.S1.WF.AUDPC <-
+  cbind(Y1.S1.WF, audpc.Y1.S1.WF) %>% rename(audpc = audpc.Y1.S1.WF)
+glimpse(Y1.S1.WF.AUDPC)
+```
 
     ## Rows: 18
     ## Columns: 14
@@ -516,6 +710,14 @@ glimpse(Y1.AUDPC)
     ## $ `adjusted kg/plant` <dbl> 2.894377, 2.342954, 2.012906, 2.129958, 2.783333, ~
     ## $ audpc               <dbl> 0.0000, 3681.8182, 3300.0000, 1500.0000, 13625.000~
 
+``` r
+#ANOVA
+Y1.S1.WF.model <-
+  lm(audpc ~ Var + Rep + Var * Rep, data = Y1.S1.WF.AUDPC)
+Y1.S1.WF.ANOVA <- anova(Y1.S1.NF.model) #ANOVA and print the results
+Y1.S1.WF.ANOVA
+```
+
     ## Analysis of Variance Table
     ## 
     ## Response: audpc
@@ -526,6 +728,14 @@ glimpse(Y1.AUDPC)
     ## Residuals  6   7293131  1215522                      
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+Y1.S1.WF.aov = aov(Y1.S1.WF.model) #ANOVA and store the data for next use
+
+##Can do post-hoc Tukey HSD with Agricolae package
+Y1.S1.WF.TUKEY <- HSD.test(Y1.S1.WF.aov, trt = 'Var')
+Y1.S1.WF.TUKEY
+```
 
     ## $statistics
     ##   MSerror Df     Mean       CV      MSD
@@ -566,11 +776,25 @@ glimpse(Y1.AUDPC)
     ## attr(,"class")
     ## [1] "group"
 
+``` r
+plot(Y1.S1.WF.TUKEY) + title(sub = "Site 1, Y1, With fertilizer")
+```
+
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
     ## numeric(0)
 
 ##### Y1 Site 2, Without fertilizer
+
+``` r
+Y1.S2.NF <- read_excel("data/3Y_for_ANOVA.xlsx",
+                       sheet = "Y1") %>% filter(Site == 2 &
+                                                  Split_trt == "Without fertilizer")
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y1.S2.NF[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
+ratings
+```
 
     ##    Percent_inf_cul_60 Percent_inf_cul_150 Percent_inf_cul_270
     ## 1             0.00000             0.00000            66.66667
@@ -592,9 +816,18 @@ glimpse(Y1.AUDPC)
     ## 17           22.22222            88.88889           100.00000
     ## 18            0.00000            25.00000            66.66667
 
+``` r
+relative <- audpc(ratings, DAP, type = "relative")
+relative
+```
+
     ##  [1] 0.1904762 0.7785714 0.4480519 0.3642857 0.8571429 0.3214286 0.3888889
     ##  [8] 0.7987013 0.6285714 0.4785714 0.9047619 0.4571429 0.2987013 0.8392857
     ## [15] 0.5476190 0.5928571 0.7777778 0.3154762
+
+``` r
+correlation(Y1.S2.NF$Adj_yield_kg, relative, method = "kendall")
+```
 
     ## 
     ## Kendall's rank correlation tau
@@ -605,6 +838,15 @@ glimpse(Y1.AUDPC)
     ## sample estimates:
     ## tau
     ##  -0.2026144
+
+``` r
+#Bind calculated absolute AUDPC to original and rename
+audpc.Y1.S2.NF <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1.S2.NF.AUDPC <-
+  cbind(Y1.S2.NF, audpc.Y1.S2.NF) %>% rename(audpc = audpc.Y1.S2.NF)
+glimpse(Y1.S2.NF.AUDPC)
+```
 
     ## Rows: 18
     ## Columns: 14
@@ -623,6 +865,14 @@ glimpse(Y1.AUDPC)
     ## $ `adjusted kg/plant` <dbl> 3.974133, 2.252135, 2.413952, 1.548937, 2.822194, ~
     ## $ audpc               <dbl> 4000.000, 16350.000, 9409.091, 7650.000, 18000.000~
 
+``` r
+#ANOVA
+Y1.S2.NF.model <-
+  lm(audpc ~ Var + Rep + Var * Rep, data = Y1.S2.NF.AUDPC)
+Y1.S2.NF.ANOVA <- anova(Y1.S2.NF.model) #ANOVA and print the results
+Y1.S2.NF.ANOVA
+```
+
     ## Analysis of Variance Table
     ## 
     ## Response: audpc
@@ -633,6 +883,14 @@ glimpse(Y1.AUDPC)
     ## Residuals  6  19073435  3178906                      
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+Y1.S2.NF.aov = aov(Y1.S2.NF.model) #ANOVA and store the data for next use
+
+##Can do post-hoc Tukey HSD with Agricolae package
+Y1.S2.NF.TUKEY <- HSD.test(Y1.S2.NF.aov, trt = 'Var')
+Y1.S2.NF.TUKEY
+```
 
     ## $statistics
     ##   MSerror Df     Mean      CV      MSD
@@ -673,11 +931,25 @@ glimpse(Y1.AUDPC)
     ## attr(,"class")
     ## [1] "group"
 
+``` r
+plot(Y1.S2.NF.TUKEY) + title(sub = "Site 2, Y1, No fertilizer")
+```
+
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
     ## numeric(0)
 
 ##### Y1 Site 2, With fertilizer
+
+``` r
+Y1.S2.WF <- read_excel("data/3Y_for_ANOVA.xlsx",
+                       sheet = "Y1") %>% filter(Site == 2 &
+                                                  Split_trt == "With fertilizer")
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y1.S2.WF[, c(9, 10, 11)]) #Have to transform into data frame for the next step to work
+ratings
+```
 
     ##    Percent_inf_cul_60 Percent_inf_cul_150 Percent_inf_cul_270
     ## 1             0.00000            27.27273            72.72727
@@ -699,9 +971,18 @@ glimpse(Y1.AUDPC)
     ## 17           22.22222           100.00000           100.00000
     ## 18           16.66667            16.66667            91.66667
 
+``` r
+relative <- audpc(ratings, DAP, type = "relative")
+relative
+```
+
     ##  [1] 0.3441558 0.8690476 0.5178571 0.3376623 0.8714286 0.8142857 0.3333333
     ##  [8] 0.8333333 0.4126984 0.3896104 0.9285714 0.5500000 0.3174603 0.6883117
     ## [15] 0.4285714 0.3214286 0.8333333 0.3809524
+
+``` r
+correlation(Y1.S2.WF$Adj_yield_kg, relative, method = "kendall")
+```
 
     ## 
     ## Kendall's rank correlation tau
@@ -712,6 +993,15 @@ glimpse(Y1.AUDPC)
     ## sample estimates:
     ## tau
     ##  -0.2360668
+
+``` r
+#Bind calculated absolute AUDPC to original and rename
+audpc.Y1.S2.WF <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y1.S2.WF.AUDPC <-
+  cbind(Y1.S2.WF, audpc.Y1.S2.WF) %>% rename(audpc = audpc.Y1.S2.WF)
+glimpse(Y1.S2.WF.AUDPC)
+```
 
     ## Rows: 18
     ## Columns: 14
@@ -730,6 +1020,14 @@ glimpse(Y1.AUDPC)
     ## $ `adjusted kg/plant` <dbl> 3.603179, 1.266667, 1.908333, 2.218706, 3.287927, ~
     ## $ audpc               <dbl> 7227.273, 18250.000, 10875.000, 7090.909, 18300.00~
 
+``` r
+#ANOVA
+Y1.S2.WF.model <-
+  lm(audpc ~ Var + Rep + Var * Rep, data = Y1.S2.WF.AUDPC)
+Y1.S2.WF.ANOVA <- anova(Y1.S2.WF.model) #ANOVA and print the results
+Y1.S2.WF.ANOVA
+```
+
     ## Analysis of Variance Table
     ## 
     ## Response: audpc
@@ -740,6 +1038,14 @@ glimpse(Y1.AUDPC)
     ## Residuals  6   5390764   898461                      
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+Y1.S2.WF.aov = aov(Y1.S2.WF.model) #ANOVA and store the data for next use
+
+##Can do post-hoc Tukey HSD with Agricolae package
+Y1.S2.WF.TUKEY <- HSD.test(Y1.S2.WF.aov, trt = 'Var')
+Y1.S2.WF.TUKEY
+```
 
     ## $statistics
     ##    MSerror Df     Mean       CV      MSD
@@ -780,6 +1086,10 @@ glimpse(Y1.AUDPC)
     ## attr(,"class")
     ## [1] "group"
 
+``` r
+plot(Y1.S2.WF.TUKEY) + title(sub = "Site 2, Y1, With fertilizer")
+```
+
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
     ## numeric(0)
@@ -787,6 +1097,159 @@ glimpse(Y1.AUDPC)
 ## Y2
 
 ### All data
+
+``` r
+#data prep
+Y2 <- read_excel("data/3Y_for_ANOVA.xlsx",
+                 sheet = "Y2")
+DAP <- c(60, 150, 270)
+ratings <-
+  as.data.frame(Y2[, c(10, 11, 12)]) #Have to transform into data frame for the next step to work
+ratings
+```
+
+    ##    Percent_inf_cul_60 Percent_inf_cul_150 Percent_inf_cul_270
+    ## 1            0.000000            0.000000           33.333333
+    ## 2            0.000000           16.666667           16.666667
+    ## 3           10.000000           10.000000           10.000000
+    ## 4            0.000000           90.000000          100.000000
+    ## 5           45.454545          100.000000          100.000000
+    ## 6           54.545455           90.909091          100.000000
+    ## 7           14.285714           28.571429           71.428571
+    ## 8            0.000000            0.000000            0.000000
+    ## 9            0.000000           27.272727           36.363636
+    ## 10           0.000000           16.666667           25.000000
+    ## 11           8.333333           50.000000           66.666667
+    ## 12          66.666667           66.666667           66.666667
+    ## 13          10.000000           90.000000          100.000000
+    ## 14          33.333333           91.666667          100.000000
+    ## 15         100.000000          100.000000          100.000000
+    ## 16           0.000000           40.000000           50.000000
+    ## 17           0.000000           25.000000           25.000000
+    ## 18          45.454545           72.727273          100.000000
+    ## 19           0.000000            0.000000           16.666667
+    ## 20           0.000000            0.000000            0.000000
+    ## 21           0.000000            8.333333            8.333333
+    ## 22           9.090909           63.636364           90.909091
+    ## 23          70.000000          100.000000          100.000000
+    ## 24          83.333333          100.000000          100.000000
+    ## 25           0.000000            0.000000           33.333333
+    ## 26           0.000000            0.000000            0.000000
+    ## 27           0.000000           11.111111           11.111111
+    ## 28           0.000000           18.181818           27.272727
+    ## 29          30.000000           50.000000           50.000000
+    ## 30          58.333333           75.000000           91.666667
+    ## 31           0.000000           90.909091          100.000000
+    ## 32          11.111111           77.777778          100.000000
+    ## 33         100.000000          100.000000          100.000000
+    ## 34           0.000000           16.666667           41.666667
+    ## 35           0.000000           18.181818           27.272727
+    ## 36          58.333333           58.333333           83.333333
+    ## 37           0.000000           16.666667           16.666667
+    ## 38           0.000000           14.285714           14.285714
+    ## 39           0.000000            0.000000            9.090909
+    ## 40           0.000000           83.333333           83.333333
+    ## 41          44.444444          100.000000          100.000000
+    ## 42          58.333333           91.666667           91.666667
+    ## 43           0.000000           42.857143           42.857143
+    ## 44           0.000000           20.000000           30.000000
+    ## 45           0.000000            0.000000            0.000000
+    ## 46           0.000000            8.333333           16.666667
+    ## 47          16.666667           50.000000           66.666667
+    ## 48         100.000000          100.000000          100.000000
+    ## 49           0.000000            0.000000            0.000000
+    ## 50          33.333333          100.000000          100.000000
+    ## 51         100.000000          100.000000          100.000000
+    ## 52          11.111111           33.333333           77.777778
+    ## 53           0.000000           41.666667           50.000000
+    ## 54          36.363636           81.818182          100.000000
+    ## 55           0.000000            0.000000            0.000000
+    ## 56           0.000000            0.000000           25.000000
+    ## 57           0.000000            0.000000           16.666667
+    ## 58           0.000000           36.363636          100.000000
+    ## 59          40.000000          100.000000          100.000000
+    ## 60          63.636364          100.000000          100.000000
+    ## 61          14.285714           28.571429           42.857143
+    ## 62           0.000000            0.000000            0.000000
+    ## 63          55.555556           66.666667           66.666667
+    ## 64           0.000000           27.272727           45.454545
+    ## 65           8.333333           33.333333           33.333333
+    ## 66          66.666667           66.666667           66.666667
+    ## 67          11.111111           77.777778           77.777778
+    ## 68          16.666667          100.000000          100.000000
+    ## 69         100.000000          100.000000          100.000000
+    ## 70           0.000000           33.333333           66.666667
+    ## 71           0.000000           16.666667           33.333333
+    ## 72         100.000000          100.000000          100.000000
+
+``` r
+relative <- audpc(ratings, DAP, type = "relative")
+relative
+```
+
+    ##  [1] 0.09523810 0.13095238 0.10000000 0.73571429 0.88311688 0.85714286
+    ##  [7] 0.37755102 0.00000000 0.24025974 0.15476190 0.45833333 0.66666667
+    ## [13] 0.75714286 0.81547619 1.00000000 0.34285714 0.19642857 0.74675325
+    ## [19] 0.04761905 0.00000000 0.06547619 0.59740260 0.93571429 0.96428571
+    ## [25] 0.09523810 0.00000000 0.08730159 0.16883117 0.45714286 0.76190476
+    ## [31] 0.74025974 0.69841270 1.00000000 0.20238095 0.16883117 0.65476190
+    ## [37] 0.13095238 0.11224490 0.02597403 0.65476190 0.88095238 0.84523810
+    ## [43] 0.33673469 0.18571429 0.00000000 0.08928571 0.47619048 1.00000000
+    ## [49] 0.00000000 0.85714286 1.00000000 0.41269841 0.35119048 0.77272727
+    ## [55] 0.00000000 0.07142857 0.04761905 0.46753247 0.87142857 0.92207792
+    ## [61] 0.29591837 0.00000000 0.64285714 0.26623377 0.27976190 0.66666667
+    ## [67] 0.63492063 0.82142857 1.00000000 0.35714286 0.17857143 1.00000000
+
+``` r
+correlation(Y2$Adj_yield_kg, relative, method = "kendall")
+```
+
+    ## 
+    ## Kendall's rank correlation tau
+    ## 
+    ## data: Y2$Adj_yield_kg and relative 
+    ## z-norm =  -3.712627 p-value = 0.0002051189 
+    ## alternative hypothesis: true rho is not equal to 0
+    ## sample estimates:
+    ## tau
+    ##  -0.3010554
+
+``` r
+#Absolute and relative AUDPC and cbind to dataframe
+audpc.abs.Y2 <-
+  audpc(ratings, DAP, type = "absolute") #Absolute AUDPC for ANOVA purposes
+Y2.AUDPC <-
+  cbind(Y2, audpc.abs.Y2) %>% rename(audpc_absolute = audpc.abs.Y2)
+
+audpc.rel.Y2 <- audpc(ratings, DAP, type = "relative")
+Y2.AUDPC <-
+  cbind(Y2.AUDPC, audpc.rel.Y2) %>% rename(audpc_relative = audpc.rel.Y2)
+glimpse(Y2.AUDPC)
+```
+
+    ## Rows: 72
+    ## Columns: 16
+    ## $ Var                 <chr> "KU 50", "KU 50", "KU 50", "Rayong 11", "Rayong 11~
+    ## $ Site                <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+    ## $ Rep                 <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+    ## $ Split_trt           <chr> "clean", "positive selection", "symptomatic", "cle~
+    ## $ Num_plnt            <dbl> 9, 12, 10, 10, 11, 11, 7, 10, 11, 12, 12, 12, 10, ~
+    ## $ Percent_inf_30      <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA~
+    ## $ Percent_inf_60      <dbl> 0.000000, 0.000000, 10.000000, 0.000000, 45.454545~
+    ## $ Percent_inf_150     <dbl> 0.000000, 16.666667, 0.000000, 90.000000, 54.54545~
+    ## $ Percent_inf_270     <dbl> 33.333333, 0.000000, 0.000000, 10.000000, 0.000000~
+    ## $ Percent_inf_cul_60  <dbl> 0.000000, 0.000000, 10.000000, 0.000000, 45.454545~
+    ## $ Percent_inf_cul_150 <dbl> 0.000000, 16.666667, 10.000000, 90.000000, 100.000~
+    ## $ Percent_inf_cul_270 <dbl> 33.333333, 16.666667, 10.000000, 100.000000, 100.0~
+    ## $ Adj_yield_kg        <dbl> 70.05945, 23.50000, 31.35884, 40.48141, 27.15696, ~
+    ## $ `adjusted kg/plant` <dbl> 5.838288, 1.958333, 2.613237, 3.373451, 2.263080, ~
+    ## $ audpc_absolute      <dbl> 2000.000, 2750.000, 2100.000, 15450.000, 18545.455~
+    ## $ audpc_relative      <dbl> 0.09523810, 0.13095238, 0.10000000, 0.73571429, 0.~
+
+``` r
+Y2.AUDPC$Var = as.factor(Y2.AUDPC$Var)
+Y2.AUDPC$Split_trt = as.factor(Y2.AUDPC$Split_trt)
+```
 
 #### Visualize data
 
@@ -810,9 +1273,31 @@ glimpse(Y1.AUDPC)
 
 ##### Visualize data
 
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-19-2.png)<!-- -->
+``` r
+ggplot(Y3.AUDPC, aes(x = Var, y = audpc_absolute, fill = Split_trt)) +
+  geom_boxplot(position = position_dodge(0.8)) +
+  geom_dotplot(binaxis = 'y',
+               stackdir = 'center',
+               position = position_dodge(0.8))
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
+``` r
+ggplot(Y3.AUDPC, aes(x = Var, y = Adj_yield_kg, fill = Split_trt)) +
+  geom_boxplot(position = position_dodge(0.8)) +
+  geom_dotplot(binaxis = 'y',
+               stackdir = 'center',
+               position = position_dodge(0.8))
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-19-2.png)<!-- -->
 
 ##### Correlation
+
+``` r
+correlation(Y3$Adj_yield_kg, Y3$Percent_inf_30, method = "kendall")
+```
 
     ## 
     ## Kendall's rank correlation tau
@@ -824,154 +1309,410 @@ glimpse(Y1.AUDPC)
     ## tau
     ##  -0.4449221
 
+``` r
+#correlation(Y3$Adj_yield_kg, Y3$Percent_inf_cul_60, method="kendall")
+#correlation(Y3$Adj_yield_kg, Y3$Percent_inf_cul_150, method="kendall")
+#correlation(Y3$Adj_yield_kg, Y3$Percent_inf_cul_270, method="kendall")
+```
+
+``` r
+#ANOVA
+Y3.model <- lm(audpc_absolute ~ Var + Rep + Var * Rep, data = Y3.AUDPC)
+Y3.ANOVA <- anova(Y3.model) #ANOVA and print the results
+Y3.ANOVA
+```
+
+    ## Analysis of Variance Table
+    ## 
+    ## Response: audpc_absolute
+    ##           Df     Sum Sq   Mean Sq F value    Pr(>F)    
+    ## Var        4  652409923 163102481  6.4965 0.0003128 ***
+    ## Rep        1   62810179  62810179  2.5018 0.1205692    
+    ## Var:Rep    4  120129795  30032449  1.1962 0.3252288    
+    ## Residuals 46 1154879890  25106085                      
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+Y3.aov = aov(Y3.model) #ANOVA and store the data for next use
+
+##Can do post-hoc Tukey HSD with Agricolae package
+Y3.TUKEY <- HSD.test(Y3.aov, trt = 'Var')
+Y3.TUKEY
+```
+
+    ## $statistics
+    ##    MSerror Df     Mean       CV
+    ##   25106085 46 16486.23 30.39263
+    ## 
+    ## $parameters
+    ##    test name.t ntr StudentizedRange alpha
+    ##   Tukey    Var   5          4.01483  0.05
+    ## 
+    ## $means
+    ##             audpc_absolute      std  r       Min   Max       Q25      Q50
+    ## Huaybong 60       14074.96 4739.816 12  6681.818 23100 11205.357 12500.00
+    ## KM 98-1           19055.40 3988.118  8 14000.000 23375 15272.727 19340.91
+    ## KU 50             12366.25 7999.089 12  1000.000 24000  5959.821 11325.00
+    ## Rayong 11         21685.61 2463.036 12 16500.000 24000 20931.818 22250.00
+    ## Rayong 5          16105.30 4356.689 12  8000.000 22875 14006.250 15687.50
+    ##                  Q75
+    ## Huaybong 60 16895.83
+    ## KM 98-1     23096.59
+    ## KU 50       20134.09
+    ## Rayong 11   23778.41
+    ## Rayong 5    19312.50
+    ## 
+    ## $comparison
+    ## NULL
+    ## 
+    ## $groups
+    ##             audpc_absolute groups
+    ## Rayong 11         21685.61      a
+    ## KM 98-1           19055.40     ab
+    ## Rayong 5          16105.30    abc
+    ## Huaybong 60       14074.96     bc
+    ## KU 50             12366.25      c
+    ## 
+    ## attr(,"class")
+    ## [1] "group"
+
+``` r
+plot(Y3.TUKEY) + title(sub = "Y3")
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+    ## numeric(0)
+
 # Correlation graphs
 
 We’ll use the ggpubr package, which includes a number of convenient
-functions for easy, publication ready graphs and figures.
+functions for easy, publication ready graphs and figures. We’ll use make
+a few versions and a multiplot with parts a,b,c for the three years.
+
+``` r
+#Easy publication ready graphs with ggpubr
+library(ggpubr)
+```
+
+``` r
+ggplot(Y1.AUDPC,
+       aes(x = audpc_relative, y = Adj_yield_kg, color = factor(Site))) +
+  geom_point(alpha = 0.7) +
+  stat_smooth(
+    aes(color = factor(Site)),
+    method = lm,
+    se = TRUE,
+    formula = y ~ x
+  ) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield' ~ (t ~ ha ^ -1))) +
+  scale_colour_discrete("Site") +
+  stat_cor(aes(color = factor(Site)),
+           label.x = 0.4,
+           show.legend = FALSE) +
+  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),
+                        show.legend = FALSE,
+                        formula = y ~ x)
+```
 
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
+``` r
+#Y2
+#All together
+ggplot(Y2.AUDPC, aes(x = audpc_relative, y = Adj_yield_kg)) +
+  geom_point(alpha = 0.7, aes(color = Split_trt)) +
+  stat_smooth(method = lm,
+              se = TRUE,
+              formula = y ~ x) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield' ~ (t ~ ha ^ -1))) +
+  scale_colour_discrete("Seed class") +
+  stat_cor(label.x = 0.25, label.y = 16) +
+  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), label.x =
+                          0.25, label.y = 12) +
+  ylim(0, 70)
+```
+
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+
+``` r
+#Y2
+ggplot(Y2.AUDPC,
+       aes(x = audpc_relative, y = Adj_yield_kg, color = Split_trt)) +
+  geom_point(alpha = 0.7, aes(color = Split_trt)) +
+  stat_smooth(method = lm,
+              se = FALSE,
+              formula = y ~ x) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield (t ha' ~ (ha ^ -1))) +
+  scale_colour_discrete("Seed class") +
+  stat_cor(label.x = 0.75,
+           label.y = c(6, 3, 0),
+           show.legend = FALSE) +
+  stat_regline_equation(
+    aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),
+    label.x = 0.4,
+    label.y = c(6, 3, 0),
+    show.legend = FALSE
+  ) +
+  ylim(0, 70)
+```
 
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
+``` r
+#Y3
+ggplot(Y3.AUDPC, aes(x = audpc_relative, y = Adj_yield_kg)) +
+  geom_point(alpha = 0.7, aes(color = Split_trt)) +
+  stat_smooth(method = lm,
+              se = TRUE,
+              formula = y ~ x) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield' ~ (t ~ ha ^ -1))) +
+  scale_colour_discrete("Seed class") +
+  stat_cor(label.x = 0.25, label.y = 20) +
+  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~")), label.x =
+                          0.25, label.y = 16) +
+  ylim(0, 70)
+```
+
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
+
+We’ll use cowplot to patch the three together into a multiplot
 
 ``` r
 library(cowplot)
-```
 
-    ## Warning: package 'cowplot' was built under R version 4.0.5
-
-    ## 
-    ## Attaching package: 'cowplot'
-
-    ## The following object is masked from 'package:ggpubr':
-    ## 
-    ##     get_legend
-
-``` r
-Y2<-ggplot(Y2.AUDPC, aes(x=audpc_relative, y=Adj_yield_kg)) + 
-    geom_point(alpha=0.7, aes(color=Split_trt)) +
-  stat_smooth(method=lm, se=TRUE, formula = y ~ x)+
-    theme_classic()+
-  labs(x="rAUDPC", y= bquote('Yield'~(t~ha^-1))) +
+#Calling plots from years 2 and 3 again
+Y2 <- ggplot(Y2.AUDPC, aes(x = audpc_relative, y = Adj_yield_kg)) +
+  geom_point(alpha = 0.7, aes(color = Split_trt)) +
+  stat_smooth(method = lm,
+              se = TRUE,
+              formula = y ~ x) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield' ~ (t ~ ha ^ -1))) +
   scale_colour_discrete("Seed class") +
-  stat_cor(label.x=0.2, label.y = 16)+
-  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),label.x=0.2, label.y=10) +
+  stat_cor(label.x = 0.2, label.y = 16) +
+  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), label.x =
+                          0.2, label.y = 10) +
   ylim(0, 70)
 
-Y3<-ggplot(Y3.AUDPC, aes(x=audpc_relative, y=Adj_yield_kg)) + 
-    geom_point(alpha=0.7, aes(color=Split_trt)) +
-  stat_smooth(method=lm, se=TRUE, formula = y ~ x)+
-    theme_classic()+
-  labs(x="rAUDPC", y= bquote('Yield'~(t~ha^-1))) +
+Y3 <- ggplot(Y3.AUDPC, aes(x = audpc_relative, y = Adj_yield_kg)) +
+  geom_point(alpha = 0.7, aes(color = Split_trt)) +
+  stat_smooth(method = lm,
+              se = TRUE,
+              formula = y ~ x) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield' ~ (t ~ ha ^ -1))) +
   scale_colour_discrete("Seed class") +
-  stat_cor(label.x=0.2, label.y = 16)+
-  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~")),label.x=0.2, label.y=10) +
+  stat_cor(label.x = 0.2, label.y = 16) +
+  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~")), label.x =
+                          0.2, label.y = 10) +
   ylim(0, 70) + ylab(NULL)
-
-plott<-align_plots(Y2, Y3, align='v', axis='l')
 ```
 
-    ## Warning: Removed 2 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_cor).
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_regline_equation).
-
-    ## Warning: Removed 2 rows containing missing values (geom_point).
-
-    ## Warning: Removed 4 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 4 rows containing non-finite values (stat_cor).
-
-    ## Warning: Removed 4 rows containing non-finite values (stat_regline_equation).
-
-    ## Warning: Removed 4 rows containing missing values (geom_point).
+Now we’ll use cowplot to make our multi-part figure. because of the
+complex arrangement we want, we will need to make 2 grid plots using by
+nesting calls.
 
 ``` r
-plo<-plot_grid(plott)
-```
+#Aligning plots for the bottom row (years 2 and 3)
+#Remove legend to line up axes well
+hi <-
+  plot_grid(
+    Y2 + theme(legend.position = "none"),
+    Y3 + theme(legend.position = "none"),
+    align = 'h',
+    labels = c("B", "C") #Add labels - this will be bottom row
+  )
 
-    ## Warning in as_grob.default(plot): Cannot convert object of class list into a
-    ## grob.
+#This is cowplot code for extracting the common legend - because the legend is the same for both years we can select either one
+hileg <- get_legend(Y2 + theme(legend.position = "bottom"))
 
-``` r
-hi<-plot_grid(Y2 + theme(legend.position="none"), Y3 + theme(legend.position = "none"), align='h', labels=c("B","C"))
-```
+#Plot the 2 parts from the same row combined and the legend
+bottom <- plot_grid(hi, hileg, ncol = 1, rel_heights = c(1, .1))
 
-    ## Warning: Removed 2 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_cor).
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_regline_equation).
-
-    ## Warning: Removed 2 rows containing missing values (geom_point).
-
-    ## Warning: Removed 4 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 4 rows containing non-finite values (stat_cor).
-
-    ## Warning: Removed 4 rows containing non-finite values (stat_regline_equation).
-
-    ## Warning: Removed 4 rows containing missing values (geom_point).
-
-``` r
-hileg<-get_legend(Y2 + theme(legend.position="bottom"))
-```
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_cor).
-
-    ## Warning: Removed 2 rows containing non-finite values (stat_regline_equation).
-
-    ## Warning: Removed 2 rows containing missing values (geom_point).
-
-``` r
-plot_grid(hi, hileg, ncol=1, rel_heights=c(1, .1))
-```
-
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
-
-``` r
-ggsave("Figure_7.tiff", height = 100, width = 178, units = "mm", dpi=300)
-
-
-top<-ggplot(Y1.AUDPC, aes(x=audpc_relative, y=Adj_yield_kg, color=factor(Site))) + 
-    geom_point(alpha=0.7) +
-  stat_smooth(aes(color=factor(Site)), method=lm, se=TRUE, formula = y ~ x)+
-    theme_classic()+ theme(legend.position = c(0.95,0.8), legend.background = element_rect(fill="white", color="black")) +
-  labs(x="rAUDPC", y= bquote('Yield'~(t~ha^-1))) +
+#Now make the top row
+top <-
+  ggplot(Y1.AUDPC,
+         aes(x = audpc_relative, y = Adj_yield_kg, color = factor(Site))) +
+  geom_point(alpha = 0.7) +
+  stat_smooth(
+    aes(color = factor(Site)),
+    method = lm,
+    se = TRUE,
+    formula = y ~ x
+  ) +
+  theme_classic() + theme(
+    legend.position = c(0.95, 0.8),
+    legend.background = element_rect(fill = "white", color = "black")
+  ) +
+  labs(x = "rAUDPC", y = bquote('Yield' ~ (t ~ ha ^ -1))) +
   scale_colour_discrete("Site") +
-  stat_cor(aes(color=factor(Site)), label.x = 0.4, label.y = c(55, 59), show.legend=FALSE)+
-  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), label.y = c(55, 59), show.legend=FALSE,
-    formula = y ~ x)
-  top
-```
+  stat_cor(
+    aes(color = factor(Site)),
+    label.x = 0.4,
+    label.y = c(55, 59),
+    show.legend = FALSE
+  ) +
+  stat_regline_equation(
+    aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")),
+    label.y = c(55, 59),
+    show.legend = FALSE,
+    formula = y ~ x
+  )
 
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-27-2.png)<!-- -->
-
-``` r
-bottom<-plot_grid(hi, hileg, ncol=1, rel_heights=c(1, .1))
-
-#Now align all 3
-plot_grid(top ,bottom, labels=c('A',' '), ncol=1)
-```
-
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-27-3.png)<!-- -->
-
-``` r
-ggsave("Combined_reg.tiff", height = 170, width = 178, units = "mm", dpi=300)
+#Now align all 3 using a second multiplot call
+plot_grid(top , bottom, labels = c('A', ' '), ncol = 1)
 ```
 
 ![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
 
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-29-2.png)<!-- -->
+``` r
+#Save the result
+ggsave(
+  "Combined_reg.tiff",
+  height = 170,
+  width = 178,
+  units = "mm",
+  dpi = 300
+)
+```
+
+## Extra If we still feel like exploring, below are some other ways to visualize
+
+``` r
+#Y3
+#Individual
+ggplot(Y3.AUDPC,
+       aes(x = audpc_relative, y = Adj_yield_kg, color = Split_trt)) +
+  geom_point(alpha = 0.7, aes(color = Split_trt)) +
+  stat_smooth(method = lm,
+              se = FALSE,
+              formula = y ~ x) +
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield (t ha' ~ (ha ^ -1))) +
+  scale_colour_discrete("Seed class") +
+  stat_cor(
+    label.x = 0.5,
+    sep = "~~~",
+    label.y = c(6, 3, 0),
+    show.legend = FALSE
+  ) +
+  stat_regline_equation(
+    aes(label = paste(..eq.label.., ..rr.label.., sep = "~~")),
+    label.x = 0.2,
+    label.y = c(6, 3, 0),
+    show.legend = FALSE
+  ) +
+  ylim(0, 70)
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+
+### Using ggscatter and adding rug plot
+
+``` r
+ggscatter(Y3.AUDPC,
+          x = "audpc_relative",
+          y = "Adj_yield_kg",
+          add = "reg.line") +
+  #stat_smooth(method=lm, se=TRUE, formula = y ~ x)+
+  #stat_smooth(data=Y2.AUDPC, aes(color=Split_trt), method=lm, se=FALSE, formula = y ~ x)+
+  geom_rug(sides = "bl", size = 0.75, aes(color = Split_trt)) + #tblr gives sides of the plot to put rug on
+  theme_classic() +
+  labs(x = "rAUDPC", y = bquote('Yield (t ha' ~ (ha ^ -1))) +
+  scale_colour_discrete("Seed class") +
+  stat_cor(label.x = 0.25, label.y = 20) +
+  stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), label.x =
+                          0.25, label.y = 16) +
+  ylim(0, 70)
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+
+``` r
+ggscatterhist(
+  Y2.AUDPC,
+  x = "audpc_relative",
+  y = "Adj_yield_kg",
+  add = "reg.line",
+  margin.plot = "histogram",
+  # I'd suggest removing this line to get density plots
+  margin.params = list(fill = "Split_trt", color = "black", size = 0.2)
+) + stat_cor(label.x = 0.25, label.y = 20) +
+  stat_regline_equation(label.x = 0.25, label.y = 18)
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-30-2.png)<!-- -->
 
     ## NULL
 
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-29-3.png)<!-- -->
+``` r
+ggscatterhist(
+  Y3.AUDPC,
+  x = "audpc_relative",
+  y = "Adj_yield_kg",
+  add = "reg.line",
+  margin.plot = "histogram",
+  # I'd suggest removing this line to get density plots
+  margin.params = list(fill = "Split_trt", color = "black", size = 0.2)
+)
+```
 
-![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-30-2.png)<!-- -->
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-30-3.png)<!-- -->
+
+### Making density plots
+
+``` r
+ggplot(Y2.AUDPC,
+       aes(x = audpc_relative, y = Adj_yield_kg, color = Split_trt)) +
+  geom_point() +
+  stat_density_2d(aes(alpha = ..piece..)) +
+  theme_classic2() +
+  guides(color = FALSE, alpha = FALSE) +
+  labs(x = "rAUDPC", y = bquote('Yield (t ha' ~ (ha ^ -1)))
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+
+``` r
+ggplot(Y3.AUDPC,
+       aes(x = audpc_relative, y = Adj_yield_kg, color = Split_trt)) +
+  stat_density_2d(aes(alpha = ..piece..)) +
+  theme_classic2() +
+  guides(color = FALSE, alpha = FALSE) +
+  labs(x = "rAUDPC", y = bquote('Yield (t ha' ~ (ha ^ -1)))
+```
+
+![](AUDPC-with-Agricolae-and-yield-correlations_files/figure-gfm/unnamed-chunk-31-2.png)<!-- -->
+
+## Citation for the agricolae package
+
+``` r
+citation(package = "agricolae")
+```
+
+    ## 
+    ## To cite package 'agricolae' in publications use:
+    ## 
+    ##   Felipe de Mendiburu (2021). agricolae: Statistical Procedures for
+    ##   Agricultural Research. R package version 1.3-5.
+    ##   https://CRAN.R-project.org/package=agricolae
+    ## 
+    ## A BibTeX entry for LaTeX users is
+    ## 
+    ##   @Manual{,
+    ##     title = {agricolae: Statistical Procedures for Agricultural Research},
+    ##     author = {Felipe {de Mendiburu}},
+    ##     year = {2021},
+    ##     note = {R package version 1.3-5},
+    ##     url = {https://CRAN.R-project.org/package=agricolae},
+    ##   }
+    ## 
+    ## ATTENTION: This citation information has been auto-generated from the
+    ## package DESCRIPTION file and may need manual editing, see
+    ## 'help("citation")'.
