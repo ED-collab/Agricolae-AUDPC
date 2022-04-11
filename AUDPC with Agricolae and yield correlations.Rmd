@@ -647,11 +647,11 @@ plot_grid(top , bottom, labels = c('A', ' '), ncol = 1)
 
 #Save the result
 ggsave(
-  "Combined_reg.tiff",
+  "Combined_reg.jpg",
   height = 170,
   width = 178,
   units = "mm",
-  dpi = 300
+  dpi = 600
 )
 ```
 
